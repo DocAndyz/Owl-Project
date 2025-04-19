@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMS Policy Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="owl-container">
+        <div class="owl">
+            <div class="owl-face">
+                <div class="owl-eye left-eye">
+                    <button onclick="openChat()">👁️</button>
+                </div>
+                <div class="owl-eye right-eye">
+                    <button onclick="openChat()">👁️</button>
+                </div>
+                <div class="owl-beak">🐦</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-container" id="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Ask me about the policies..." onkeydown="if(event.key === 'Enter') sendMessage()">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function openChat() {
+            document.getElementById("chat-container").style.display = "block";
+            document.getElementById("chat-box").innerHTML = "<p>Hi! Ask me about the company's policies.</p>";
+        }
+
+        // Predefined responses for policies
+        const responses = {
+            "what is the ims policy": "The Integrated Management System (IMS) policy integrates quality, environmental, and health and safety management systems to ensure we meet our operational, compliance, and customer requirements.",
+            "what is the covid policy": "Our COVID policy ensures that all employees and visitors follow strict safety protocols, including regular sanitization, mask-wearing, and social distancing measures to reduce the spread of COVID-19.",
+            "what is the information security policy": "The Information Security policy outlines measures and procedures to protect company data, systems, and intellectual property from unauthorized access, ensuring confidentiality, integrity, and availability of all data.",
+            "what is the quality policy": "The Quality policy focuses on achieving excellence by meeting customer requirements and continually improving processes. We are committed to ensuring that all products and services are delivered with the highest quality standards.",
+            "what is the business continuity policy": "The Business Continuity policy provides guidelines for maintaining and recovering critical business functions in case of an emergency or unexpected disruption, ensuring minimal impact on operations and customer service.",
+            "how does ims integrate policies": "IMS integrates different management systems such as quality, environment, and health & safety policies into a unified framework to streamline processes, reduce duplication, and ensure consistent standards across operations.",
+            "how do we ensure information security": "We ensure information security by implementing encryption, access controls, employee training, and regular audits to protect sensitive data from external and internal threats.",
+            "what are the key measures in the covid policy": "Key measures in our COVID policy include regular temperature checks, mandatory mask-wearing, sanitizing stations, and social distancing protocols for both employees and visitors.",
+            "how does the quality policy impact customer satisfaction": "The Quality policy impacts customer satisfaction by ensuring that we meet customer expectations through reliable, high-quality products and services, with a strong focus on continuous improvement."
+        };
+
+        function sendMessage() {
+            const userInput = document.getElementById("user-input").value.toLowerCase();
+            if (userInput.trim() !== "") {
+                document.getElementById("chat-box").innerHTML += `<p><b>You:</b> ${userInput}</p>`;
+                document.getElementById("user-input").value = '';
+
+                // Search for a matching response or default to a fallback
+                const response = responses[userInput] || "Sorry, I don't understand that question. Please try again.";
+                
+                setTimeout(() => {
+                    document.getElementById("chat-box").innerHTML += `<p><b>Owl:</b> ${response}</p>`;
+                }, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
